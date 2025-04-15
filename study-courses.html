@@ -1,0 +1,2472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Courses - NajTech</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <style>
+        .course-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 15px;
+            overflow: hidden;
+            background: #fff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-banner {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-banner img {
+            transition: transform 0.5s ease;
+        }
+
+        .course-card:hover .card-banner img {
+            transform: scale(1.1);
+        }
+
+        .card-content {
+            padding: 20px;
+            background: linear-gradient(to bottom, #ffffff, #f8f9fa);
+        }
+
+        .badge {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .card-title {
+            color: #2d3436;
+            font-size: 1.2em;
+            margin: 10px 0;
+            transition: color 0.3s ease;
+        }
+
+        .course-card:hover .card-title {
+            color: #0984e3;
+        }
+
+        .price {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #00b894;
+        }
+
+        .card-meta-list {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .card-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #636e72;
+        }
+
+        .rating-wrapper {
+            color: #fdcb6e;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .grid-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5em;
+            color: #2d3436;
+            margin-bottom: 20px;
+        }
+
+        .section-text {
+            text-align: center;
+            color: #636e72;
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+
+        .abs-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .add-to-cart-btn {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: #0984e3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .add-to-cart-btn:hover {
+            background: #0770c2;
+        }
+
+        .add-to-cart-btn ion-icon {
+            font-size: 1.2em;
+        }
+
+        .cart-count {
+            background: #ff6b6b;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 0.8em;
+            position: absolute;
+            top: -5px;
+            right: -5px;
+        }
+
+        .success-message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #00b894;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            animation: slideIn 0.3s ease, fadeOut 2s ease 1.7s forwards;
+        }
+
+        .success-message ion-icon {
+            font-size: 1.2em;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <article>
+            <section class="section course" id="courses">
+                <div class="container">
+                    <h2 class="section-title">Development Courses</h2>
+                    <p class="section-text">Explore our comprehensive range of development courses designed to help you master the latest technologies.</p>
+                    
+                    <div class="grid-list">
+                        <!-- Web Development Courses -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/web-development.jpg" alt="Web Development" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">3 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">Web Development</span>
+                                <h3 class="card-title">Complete Web Development Bootcamp</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <span class="span">(4.9)</span>
+                                    </div>
+                                    <p class="price">$99.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">12 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">24/7 Support</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="web-dev" data-course-price="99.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Python Development -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/python.jpg" alt="Python Development" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">2 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">Python</span>
+                                <h3 class="card-title">Python Programming Masterclass</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star-half"></ion-icon>
+                                        <span class="span">(4.7)</span>
+                                    </div>
+                                    <p class="price">$79.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">10 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">Community Access</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="python" data-course-price="79.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Mobile App Development -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/flutter.jpg" alt="Mobile Development" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">4 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">Mobile Development</span>
+                                <h3 class="card-title">Flutter & Dart Development</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <span class="span">(4.8)</span>
+                                    </div>
+                                    <p class="price">$129.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">15 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">Project Support</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="mobile-dev" data-course-price="129.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Data Science -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/data-science.jpg" alt="Data Science" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">6 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">Data Science</span>
+                                <h3 class="card-title">Data Science & Machine Learning</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <span class="span">(4.9)</span>
+                                    </div>
+                                    <p class="price">$149.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">20 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">Mentorship</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="data-science" data-course-price="149.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Cybersecurity -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/cybersecurity.jpg" alt="Cybersecurity" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">5 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">Cybersecurity</span>
+                                <h3 class="card-title">Ethical Hacking & Security</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star-half"></ion-icon>
+                                        <span class="span">(4.8)</span>
+                                    </div>
+                                    <p class="price">$139.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">18 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">Lab Access</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="cybersecurity" data-course-price="139.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Cloud Computing -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/cloud-computing.png" alt="Cloud Computing" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">4 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">Cloud Computing</span>
+                                <h3 class="card-title">AWS & Cloud Architecture</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <span class="span">(4.9)</span>
+                                    </div>
+                                    <p class="price">$119.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">16 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">AWS Credits</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="cloud-computing" data-course-price="119.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- React Development -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/react.jpg" alt="React Development" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">2 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">Frontend</span>
+                                <h3 class="card-title">React.js Complete Guide</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <span class="span">(4.9)</span>
+                                    </div>
+                                    <p class="price">$89.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">14 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">Project Based</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="react-dev" data-course-price="89.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Node.js Development -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/nodejs.jpg" alt="Node.js Development" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">3 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">Backend</span>
+                                <h3 class="card-title">Node.js & Express.js Mastery</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star-half"></ion-icon>
+                                        <span class="span">(4.7)</span>
+                                    </div>
+                                    <p class="price">$99.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">16 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">API Development</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="node-dev" data-course-price="99.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- UI/UX Design -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/ui-ux.jpg" alt="UI/UX Design" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">2 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">Design</span>
+                                <h3 class="card-title">UI/UX Design Fundamentals</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <span class="span">(4.8)</span>
+                                    </div>
+                                    <p class="price">$79.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">12 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">Portfolio Projects</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="ui-ux" data-course-price="79.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- DevOps -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/devops.jpg" alt="DevOps" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">4 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">DevOps</span>
+                                <h3 class="card-title">DevOps Engineering</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <span class="span">(4.9)</span>
+                                    </div>
+                                    <p class="price">$149.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">20 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">CI/CD Pipeline</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="devops" data-course-price="149.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Blockchain Development -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/blockchain.jpg" alt="Blockchain" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">5 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">Blockchain</span>
+                                <h3 class="card-title">Blockchain & Smart Contracts</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star-half"></ion-icon>
+                                        <span class="span">(4.8)</span>
+                                    </div>
+                                    <p class="price">$159.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">18 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">DApp Development</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="blockchain" data-course-price="159.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Game Development -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/game-dev.jpg" alt="Game Development" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">6 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">Game Dev</span>
+                                <h3 class="card-title">Unity Game Development</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <span class="span">(4.9)</span>
+                                    </div>
+                                    <p class="price">$129.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">24 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">Game Projects</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="game-dev" data-course-price="129.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- iOS Development -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/ios.jpg" alt="iOS Development" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">4 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">Mobile</span>
+                                <h3 class="card-title">iOS App Development</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <span class="span">(4.8)</span>
+                                    </div>
+                                    <p class="price">$139.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">16 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">App Store Ready</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="ios-dev" data-course-price="139.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Android Development -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/android.jpg" alt="Android Development" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">4 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">Mobile</span>
+                                <h3 class="card-title">Android App Development</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star-half"></ion-icon>
+                                        <span class="span">(4.7)</span>
+                                    </div>
+                                    <p class="price">$129.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">18 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">Play Store Ready</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="android-dev" data-course-price="129.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Full Stack Development -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/mern-stack.jpg" alt="Full Stack Development" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">6 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">Full Stack</span>
+                                <h3 class="card-title">MERN Stack Development</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <span class="span">(4.9)</span>
+                                    </div>
+                                    <p class="price">$149.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">24 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">Complete Projects</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="full-stack" data-course-price="149.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Digital Marketing -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/digital-marketing.jpg" alt="Digital Marketing" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">3 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">Marketing</span>
+                                <h3 class="card-title">Digital Marketing Mastery</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <span class="span">(4.8)</span>
+                                    </div>
+                                    <p class="price">$89.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">15 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">Case Studies</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="digital-marketing" data-course-price="89.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Content Writing -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/content-writing.jpg" alt="Content Writing" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">2 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">Writing</span>
+                                <h3 class="card-title">Professional Content Writing</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star-half"></ion-icon>
+                                        <span class="span">(4.7)</span>
+                                    </div>
+                                    <p class="price">$69.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">10 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">Portfolio Building</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="content-writing" data-course-price="69.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Video Editing -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/video-editing.jpg" alt="Video Editing" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">3 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">Media</span>
+                                <h3 class="card-title">Video Editing & Production</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <span class="span">(4.9)</span>
+                                    </div>
+                                    <p class="price">$99.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">12 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">Project Based</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="video-editing" data-course-price="99.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Graphic Design -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/graphic-design.jpg" alt="Graphic Design" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">3 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">Design</span>
+                                <h3 class="card-title">Graphic Design Masterclass</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <span class="span">(4.8)</span>
+                                    </div>
+                                    <p class="price">$89.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">14 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">Design Tools</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="graphic-design" data-course-price="89.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Photography -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/photography.jpg" alt="Photography" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">2 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">Photography</span>
+                                <h3 class="card-title">Professional Photography</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star-half"></ion-icon>
+                                        <span class="span">(4.7)</span>
+                                    </div>
+                                    <p class="price">$79.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">10 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">Practical Sessions</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="photography" data-course-price="79.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Music Production -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/music-production.jpg" alt="Music Production" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">4 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">Music</span>
+                                <h3 class="card-title">Music Production & Mixing</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <span class="span">(4.9)</span>
+                                    </div>
+                                    <p class="price">$119.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">16 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">Studio Access</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="music-production" data-course-price="119.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- 3D Modeling -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/3d-modeling.jpg" alt="3D Modeling" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">5 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">3D Design</span>
+                                <h3 class="card-title">3D Modeling & Animation</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <span class="span">(4.8)</span>
+                                    </div>
+                                    <p class="price">$129.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">20 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">Industry Tools</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="3d-modeling" data-course-price="129.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Business Analytics -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/business-analytics.jpg" alt="Business Analytics" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">3 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">Business</span>
+                                <h3 class="card-title">Business Analytics & Insights</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star-half"></ion-icon>
+                                        <span class="span">(4.7)</span>
+                                    </div>
+                                    <p class="price">$99.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">12 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">Case Studies</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="business-analytics" data-course-price="99.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Project Management -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/project-management.jpg" alt="Project Management" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">4 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">Management</span>
+                                <h3 class="card-title">Project Management Professional</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <span class="span">(4.9)</span>
+                                    </div>
+                                    <p class="price">$139.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">16 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">PMP Prep</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="project-management" data-course-price="139.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Financial Analysis -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/financial-analysis.jpg" alt="Financial Analysis" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">5 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">Finance</span>
+                                <h3 class="card-title">Financial Analysis & Modeling</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <span class="span">(4.8)</span>
+                                    </div>
+                                    <p class="price">$149.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">18 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">Excel Mastery</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="financial-analysis" data-course-price="149.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- English Language -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/english.jpg" alt="English Language" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">3 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">Language</span>
+                                <h3 class="card-title">Business English Mastery</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <span class="span">(4.8)</span>
+                                    </div>
+                                    <p class="price">$79.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">12 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">Live Practice</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="english" data-course-price="79.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Spanish Language -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/spanish.jpg" alt="Spanish Language" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">4 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">Language</span>
+                                <h3 class="card-title">Spanish for Beginners</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star-half"></ion-icon>
+                                        <span class="span">(4.7)</span>
+                                    </div>
+                                    <p class="price">$89.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">15 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">Cultural Insights</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="spanish" data-course-price="89.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Public Speaking -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/public-speaking.jpg" alt="Public Speaking" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">2 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">Communication</span>
+                                <h3 class="card-title">Public Speaking Mastery</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <span class="span">(4.9)</span>
+                                    </div>
+                                    <p class="price">$69.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">8 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">Live Practice</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="public-speaking" data-course-price="69.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Time Management -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/time-management.jpg" alt="Time Management" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">1 Month</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">Productivity</span>
+                                <h3 class="card-title">Time Management & Productivity</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <span class="span">(4.8)</span>
+                                    </div>
+                                    <p class="price">$49.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">6 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">Tools & Templates</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="time-management" data-course-price="49.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Leadership -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/leadership.jpg" alt="Leadership" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">3 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">Management</span>
+                                <h3 class="card-title">Leadership & Team Management</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <span class="span">(4.9)</span>
+                                    </div>
+                                    <p class="price">$99.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">10 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">Case Studies</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="leadership" data-course-price="99.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Artificial Intelligence -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/ai-deep-learning.jpg" alt="Artificial Intelligence" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">6 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">AI</span>
+                                <h3 class="card-title">AI & Deep Learning</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <span class="span">(4.9)</span>
+                                    </div>
+                                    <p class="price">$159.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">24 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">Project Based</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="ai-deep-learning" data-course-price="159.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Quantum Computing -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/quantum-computing.jpg" alt="Quantum Computing" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">5 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">Quantum</span>
+                                <h3 class="card-title">Quantum Computing Fundamentals</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star-half"></ion-icon>
+                                        <span class="span">(4.8)</span>
+                                    </div>
+                                    <p class="price">$149.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">20 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">Lab Access</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="quantum-computing" data-course-price="149.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Robotics -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/robotics.jpg" alt="Robotics" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">6 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">Robotics</span>
+                                <h3 class="card-title">Robotics & Automation</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <span class="span">(4.9)</span>
+                                    </div>
+                                    <p class="price">$169.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">22 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">Hands-on Labs</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="robotics" data-course-price="169.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- AR/VR Development -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/ar-vr.jpg" alt="AR/VR Development" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">4 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">AR/VR</span>
+                                <h3 class="card-title">AR/VR Development</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <span class="span">(4.8)</span>
+                                    </div>
+                                    <p class="price">$129.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">16 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">Project Based</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="ar-vr" data-course-price="129.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Ethical Hacking -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/ethical-hacking.jpg" alt="Ethical Hacking" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">5 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">Security</span>
+                                <h3 class="card-title">Advanced Ethical Hacking</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <span class="span">(4.9)</span>
+                                    </div>
+                                    <p class="price">$149.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">20 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">Lab Access</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="ethical-hacking" data-course-price="149.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- French Language -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/french.jpg" alt="French Language" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">4 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">Language</span>
+                                <h3 class="card-title">French Language Mastery</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <span class="span">(4.8)</span>
+                                    </div>
+                                    <p class="price">$89.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">16 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">Cultural Immersion</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="french" data-course-price="89.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Japanese Language -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/japanese.jpg" alt="Japanese Language" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">6 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">Language</span>
+                                <h3 class="card-title">Japanese for Beginners</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star-half"></ion-icon>
+                                        <span class="span">(4.7)</span>
+                                    </div>
+                                    <p class="price">$99.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">20 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">Kanji Practice</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="japanese" data-course-price="99.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Creative Writing -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/creative-writing.jpg" alt="Creative Writing" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">3 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">Writing</span>
+                                <h3 class="card-title">Creative Writing Workshop</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <span class="span">(4.9)</span>
+                                    </div>
+                                    <p class="price">$79.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">12 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">Workshop Sessions</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="creative-writing" data-course-price="79.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Personal Finance -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/personal-finance.jpg" alt="Personal Finance" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">2 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">Finance</span>
+                                <h3 class="card-title">Personal Finance Management</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <span class="span">(4.8)</span>
+                                    </div>
+                                    <p class="price">$69.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">8 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">Financial Tools</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="personal-finance" data-course-price="69.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Health & Wellness -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/health-wellness.jpg" alt="Health & Wellness" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">3 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">Wellness</span>
+                                <h3 class="card-title">Health & Wellness Coaching</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <span class="span">(4.9)</span>
+                                    </div>
+                                    <p class="price">$89.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">10 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">Personal Plans</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="health-wellness" data-course-price="89.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- IoT Development -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/iot.jpg" alt="IoT Development" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">4 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">IoT</span>
+                                <h3 class="card-title">IoT Development & Integration</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <span class="span">(4.8)</span>
+                                    </div>
+                                    <p class="price">$129.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">16 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">Hardware Kits</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="iot" data-course-price="129.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Computer Vision -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/computer-vision.jpg" alt="Computer Vision" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">5 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">AI</span>
+                                <h3 class="card-title">Computer Vision & Image Processing</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <span class="span">(4.9)</span>
+                                    </div>
+                                    <p class="price">$149.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">18 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">Project Based</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="computer-vision" data-course-price="149.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Natural Language Processing -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/nlp.jpg" alt="Natural Language Processing" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">4 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">AI</span>
+                                <h3 class="card-title">Natural Language Processing</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <span class="span">(4.8)</span>
+                                    </div>
+                                    <p class="price">$139.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">16 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">Chatbot Projects</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="nlp" data-course-price="139.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Cybersecurity -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/advanced-cybersecurity.jpg" alt="Cybersecurity" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">5 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">Security</span>
+                                <h3 class="card-title">Advanced Cybersecurity</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <span class="span">(4.9)</span>
+                                    </div>
+                                    <p class="price">$159.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">20 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">Lab Access</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="advanced-cybersecurity" data-course-price="159.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Cloud Architecture -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/cloud-architecture.jpg" alt="Cloud Architecture" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">4 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">Cloud</span>
+                                <h3 class="card-title">Cloud Architecture & Design</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <span class="span">(4.8)</span>
+                                    </div>
+                                    <p class="price">$139.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">16 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">Multi-Cloud</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="cloud-architecture" data-course-price="139.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Entrepreneurship -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/entrepreneurship.jpg" alt="Entrepreneurship" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">3 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">Business</span>
+                                <h3 class="card-title">Startup Entrepreneurship</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <span class="span">(4.9)</span>
+                                    </div>
+                                    <p class="price">$99.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">12 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">Business Planning</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="entrepreneurship" data-course-price="99.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Digital Marketing -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/advanced-marketing.jpg" alt="Digital Marketing" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">4 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">Marketing</span>
+                                <h3 class="card-title">Advanced Digital Marketing</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <span class="span">(4.8)</span>
+                                    </div>
+                                    <p class="price">$119.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">16 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">Campaign Tools</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="advanced-marketing" data-course-price="119.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Business Analytics -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/business-intelligence.jpg" alt="Business Analytics" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">3 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">Analytics</span>
+                                <h3 class="card-title">Business Intelligence & Analytics</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <span class="span">(4.9)</span>
+                                    </div>
+                                    <p class="price">$129.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">14 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">Data Tools</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="business-intelligence" data-course-price="129.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Supply Chain -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/supply-chain.jpg" alt="Supply Chain" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">4 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">Logistics</span>
+                                <h3 class="card-title">Supply Chain Management</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star-half"></ion-icon>
+                                        <span class="span">(4.7)</span>
+                                    </div>
+                                    <p class="price">$109.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">15 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">Case Studies</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="supply-chain" data-course-price="109.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Human Resources -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/hr-management.jpg" alt="Human Resources" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">3 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">HR</span>
+                                <h3 class="card-title">HR Management & Development</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <span class="span">(4.8)</span>
+                                    </div>
+                                    <p class="price">$99.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">12 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">HR Tools</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="hr-management" data-course-price="99.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Machine Learning -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/machine-learning.jpg" alt="Machine Learning" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">5 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">AI</span>
+                                <h3 class="card-title">Advanced Machine Learning</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <span class="span">(4.9)</span>
+                                    </div>
+                                    <p class="price">$159.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">20 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">ML Projects</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="machine-learning" data-course-price="159.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Cloud Security -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/cloud-security.jpg" alt="Cloud Security" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">4 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">Security</span>
+                                <h3 class="card-title">Cloud Security & Compliance</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <span class="span">(4.8)</span>
+                                    </div>
+                                    <p class="price">$139.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">16 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">Security Tools</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="cloud-security" data-course-price="139.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Data Engineering -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/data-engineering.jpg" alt="Data Engineering" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">5 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">Data</span>
+                                <h3 class="card-title">Data Engineering & ETL</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <span class="span">(4.9)</span>
+                                    </div>
+                                    <p class="price">$149.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">18 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">Pipeline Projects</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="data-engineering" data-course-price="149.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Microservices -->
+                        <div class="course-card">
+                            <div class="card-banner">
+                                <img src="assets/images/courses/microservices.jpg" alt="Microservices" class="img-cover">
+                                <div class="abs-badge">
+                                    <ion-icon name="time-outline"></ion-icon>
+                                    <span class="span">4 Months</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge">Architecture</span>
+                                <h3 class="card-title">Microservices Architecture</h3>
+                                <div class="wrapper">
+                                    <div class="rating-wrapper">
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <ion-icon name="star"></ion-icon>
+                                        <span class="span">(4.8)</span>
+                                    </div>
+                                    <p class="price">$129.99</p>
+                                </div>
+                                <ul class="card-meta-list">
+                                    <li class="card-meta-item">
+                                        <ion-icon name="library-outline"></ion-icon>
+                                        <span class="span">16 Modules</span>
+                                    </li>
+                                    <li class="card-meta-item">
+                                        <ion-icon name="people-outline"></ion-icon>
+                                        <span class="span">Project Based</span>
+                                    </li>
+                                </ul>
+                                <button class="add-to-cart-btn" data-course-id="microservices" data-course-price="129.99">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </article>
+    </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize cart if it doesn't exist
+            if (!localStorage.getItem('cartItems')) {
+                localStorage.setItem('cartItems', JSON.stringify([]));
+            }
+
+            const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+
+            function updateCartCount() {
+                try {
+                    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+                    const count = cartItems.length;
+                    // Update all cart count elements on the page
+                    document.querySelectorAll('.cart-count').forEach(element => {
+                        element.textContent = count;
+                        element.style.display = count > 0 ? 'block' : 'none';
+                    });
+                } catch (error) {
+                    console.error('Error updating cart count:', error);
+                    localStorage.setItem('cartItems', JSON.stringify([]));
+                    document.querySelectorAll('.cart-count').forEach(element => {
+                        element.textContent = '0';
+                        element.style.display = 'none';
+                    });
+                }
+            }
+
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    try {
+                        const courseCard = this.closest('.course-card');
+                        const courseId = this.dataset.courseId;
+                        const coursePrice = this.dataset.coursePrice;
+                        const courseTitle = courseCard.querySelector('.card-title').textContent;
+                        const courseImage = courseCard.querySelector('img').src;
+
+                        let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+                        
+                        // Check if course is already in cart
+                        const existingItem = cartItems.find(item => item.id === courseId);
+                        if (existingItem) {
+                            alert('This course is already in your cart!');
+                            return;
+                        }
+
+                        // Add new item to cart
+                        cartItems.push({
+                            id: courseId,
+                            title: courseTitle,
+                            price: coursePrice,
+                            image: courseImage
+                        });
+
+                        localStorage.setItem('cartItems', JSON.stringify(cartItems));
+                        updateCartCount();
+                        
+                        // Show success message
+                        const successMessage = document.createElement('div');
+                        successMessage.className = 'success-message';
+                        successMessage.innerHTML = `
+                            <ion-icon name="checkmark-circle-outline"></ion-icon>
+                            <span>Course added to cart!</span>
+                        `;
+                        document.body.appendChild(successMessage);
+                        
+                        // Remove the message after animation completes
+                        setTimeout(() => {
+                            successMessage.remove();
+                        }, 2000);
+                    } catch (error) {
+                        console.error('Error adding to cart:', error);
+                        alert('There was an error adding the course to your cart. Please try again.');
+                    }
+                });
+            });
+
+            // Initial cart count update
+            updateCartCount();
+
+            // Update cart count when page is shown (for when user returns from cart page)
+            document.addEventListener('visibilitychange', function() {
+                if (!document.hidden) {
+                    updateCartCount();
+                }
+            });
+
+            // Also update cart count when the page becomes visible again
+            window.addEventListener('focus', updateCartCount);
+
+            // Update cart count every 2 seconds to ensure sync
+            setInterval(updateCartCount, 2000);
+        });
+    </script>
+</body>
+</html> 

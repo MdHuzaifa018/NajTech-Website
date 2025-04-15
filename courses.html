@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NajTech - Available Courses</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    .courses-section {
+      padding: 80px 0;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .courses-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, 
+        rgba(255, 0, 0, 0.1),
+        rgba(0, 255, 0, 0.1),
+        rgba(0, 0, 255, 0.1),
+        rgba(255, 0, 0, 0.1)
+      );
+      background-size: 400% 400%;
+      animation: gradientAnimation 15s ease infinite;
+      z-index: 0;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 3rem;
+      background: linear-gradient(45deg, 
+        #ff0000,
+        #ff8c00,
+        #00ff00,
+        #0000ff,
+        #ff0000
+      );
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 20px;
+      position: relative;
+      display: inline-block;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: gradientAnimation 8s ease infinite;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+      font-weight: 800;
+      letter-spacing: 1px;
+      padding: 0 20px;
+    }
+
+    .section-title::before {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, 
+        #ff0000,
+        #ff8c00,
+        #00ff00,
+        #0000ff,
+        #ff0000
+      );
+      background-size: 200% 200%;
+      animation: gradientAnimation 8s ease infinite;
+      border-radius: 3px;
+    }
+
+    .section-text {
+      text-align: center;
+      color: #4b5563;
+      max-width: 800px;
+      margin: 40px auto;
+      font-size: 1.3rem;
+      line-height: 1.8;
+      position: relative;
+      z-index: 1;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .section-text:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      background: rgba(255, 255, 255, 0.95);
+    }
+
+    .section-text::before {
+      content: '"';
+      position: absolute;
+      top: -20px;
+      left: 20px;
+      font-size: 4rem;
+      color: rgba(0, 0, 0, 0.1);
+      font-family: serif;
+    }
+
+    .section-text::after {
+      content: '"';
+      position: absolute;
+      bottom: -20px;
+      right: 20px;
+      font-size: 4rem;
+      color: rgba(0, 0, 0, 0.1);
+      font-family: serif;
+    }
+
+    .grid-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      padding: 0 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .course-card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .course-card::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      background: linear-gradient(45deg, 
+        #ff0000,
+        #ff8c00,
+        #00ff00,
+        #0000ff,
+        #ff0000
+      );
+      background-size: 400% 400%;
+      border-radius: 16px;
+      z-index: -1;
+      animation: gradientAnimation 8s linear infinite;
+    }
+
+    .course-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 15px;
+      z-index: -1;
+    }
+
+    .card-icon {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(45deg, 
+        #ff0000,
+        #ff8c00,
+        #00ff00,
+        #0000ff,
+        #ff0000
+      );
+      background-size: 300% 300%;
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      color: white;
+      font-size: 30px;
+      transition: all 0.3s ease;
+      animation: gradientAnimation 8s ease infinite;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-title {
+      font-size: 1.5rem;
+      background: linear-gradient(45deg, 
+        #ff0000,
+        #ff8c00,
+        #00ff00,
+        #0000ff
+      );
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 15px;
+      transition: all 0.3s ease;
+      animation: gradientAnimation 8s ease infinite;
+    }
+
+    .course-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 20px 0;
+    }
+
+    .course-list li {
+      padding: 8px 0;
+      color: #4b5563;
+      position: relative;
+      padding-left: 25px;
+      transition: all 0.3s ease;
+    }
+
+    .course-list li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      background: linear-gradient(45deg, 
+        #ff0000,
+        #ff8c00,
+        #00ff00,
+        #0000ff
+      );
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      animation: gradientAnimation 8s ease infinite;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 30px;
+      background: linear-gradient(45deg, 
+        #FF6B6B 0%,
+        #FF8E53 25%,
+        #FFD93D 50%,
+        #6BCB77 75%,
+        #4D96FF 100%
+      );
+      background-size: 200% 200%;
+      color: #ffffff;
+      text-decoration: none;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      font-weight: 600;
+      position: relative;
+      overflow: hidden;
+      animation: gradientAnimation 5s ease infinite;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      border: none;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      transition: 0.5s;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      letter-spacing: 2px;
+      animation: gradientAnimation 3s ease infinite;
+    }
+
+    .btn:hover::before {
+      left: 100%;
+    }
+
+    .btn:active {
+      transform: translateY(-1px) scale(0.98);
+    }
+
+    .course-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .course-card:hover .card-icon {
+      transform: rotate(360deg) scale(1.1);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .course-card:hover .card-title {
+      animation: gradientAnimation 4s ease infinite;
+    }
+
+    .course-list li:hover {
+      transform: translateX(10px);
+      color: #ff0000;
+    }
+
+    .course-list li:hover::before {
+      transform: scale(1.2);
+      animation: gradientAnimation 4s ease infinite;
+    }
+
+    @keyframes gradientAnimation {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .grid-list {
+        grid-template-columns: 1fr;
+        padding: 0 15px;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="courses-section">
+      <div class="container">
+        <h2 class="section-title">Available Courses</h2>
+        <p class="section-text">Explore our comprehensive range of courses designed to help you achieve your educational goals. Each program is carefully crafted to provide the best learning experience.</p>
+
+        <div class="grid-list">
+          <!-- Online Degree Programs -->
+          <div class="course-card">
+            <div class="card-icon">
+              <i class="fas fa-laptop"></i>
+            </div>
+            <h3 class="card-title">Online Degree Programs</h3>
+            <ul class="course-list">
+              <li>Bachelor of Computer Science</li>
+              <li>Master of Information Technology</li>
+              <li>Bachelor of Business Administration</li>
+              <li>Master of Data Science</li>
+            </ul>
+            <a href="online-degree-programs.html" class="btn">View Details</a>
+          </div>
+
+          <!-- Non-Degree Programs -->
+          <div class="course-card">
+            <div class="card-icon">
+              <i class="fas fa-graduation-cap"></i>
+            </div>
+            <h3 class="card-title">Non-Degree Programs</h3>
+            <ul class="course-list">
+              <li>Professional Certificates</li>
+              <li>Skill Development Courses</li>
+              <li>Industry Training Programs</li>
+              <li>Executive Education</li>
+            </ul>
+            <a href="non-degree-programs.html" class="btn">View Details</a>
+          </div>
+
+          <!-- Off-Campus Programs -->
+          <div class="course-card">
+            <div class="card-icon">
+              <i class="fas fa-building"></i>
+            </div>
+            <h3 class="card-title">Off-Campus Programs</h3>
+            <ul class="course-list">
+              <li>Regional Center Programs</li>
+              <li>Corporate Training</li>
+              <li>International Programs</li>
+              <li>Community Education</li>
+            </ul>
+            <a href="off-campus-programs.html" class="btn">View Details</a>
+          </div>
+
+          <!-- Hybrid Distance Programs -->
+          <div class="course-card">
+            <div class="card-icon">
+              <i class="fas fa-chalkboard-teacher"></i>
+            </div>
+            <h3 class="card-title">Hybrid Distance Programs</h3>
+            <ul class="course-list">
+              <li>Flexible Learning Program</li>
+              <li>Blended Learning Program</li>
+              <li>Weekend Intensive Program</li>
+              <li>Virtual Classroom Program</li>
+            </ul>
+            <a href="hybrid-distance-programs.html" class="btn">View Details</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html> 
